@@ -131,10 +131,6 @@
 .lightbox-thumbs{mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);}
 .lightbox-thumbs button{flex-basis:96px;height:64px;}
 .lightbox-thumbs button.active{border:2px solid #fff;}
-.brand{min-width:170px;}
-.brand-logo{display:block;width:164px;height:auto;max-height:45px;object-fit:contain;background:transparent;}
-.footer-brand img{width:196px;height:auto;max-height:48px;object-fit:contain;background:transparent;}
-.preloader-logo{width:200px;height:auto;max-height:48px;object-fit:contain;background:transparent;border-radius:0;box-shadow:none;}
 @media(max-width:760px){
   .property-gallery{width:calc(100% + 40px);margin-inline:-20px;}
   .gallery-mosaic{display:none;}
@@ -145,8 +141,6 @@
   .lightbox-content{width:100%;}
   .lightbox-photo{height:min(72vh,760px);}
   .lightbox-photo .lightbox-prev{left:8px}.lightbox-photo .lightbox-next{right:8px}
-  .brand{min-width:0}.brand-logo{width:142px;max-height:38px;}
-  .footer-brand img{width:174px;max-height:43px;}
 }
 @media(max-width:420px){.gallery-mobile{height:92vw;min-height:260px}.gallery-lightbox{padding:58px 10px 12px}.lightbox-photo{height:min(68vh,650px)}}
 @media(prefers-reduced-motion:reduce){.gallery-mosaic-side button img{transition:none}.gallery-lightbox{animation:none!important}}
