@@ -100,6 +100,7 @@ export function PropertyGallery({ images, title }: { images: PropertyImage[]; ti
     </section>
 
     {lightboxOpen && <div className="gallery-lightbox" role="dialog" aria-modal="true" aria-label={`${title} photo gallery`} ref={dialog} onClick={() => setLightboxOpen(false)}>
+      <button className="lightbox-exit" type="button" onClick={() => setLightboxOpen(false)}><span aria-hidden="true">←</span> Back to property</button>
       <button ref={closeButton} className="lightbox-close" type="button" onClick={() => setLightboxOpen(false)} aria-label="Close photo gallery">×</button>
       <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
         <div className="lightbox-photo" {...swipeHandlers}>

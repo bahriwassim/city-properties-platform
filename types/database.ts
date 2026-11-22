@@ -2,7 +2,7 @@ export type ListingType = 'sale' | 'rent' | 'commercial';
 export type PropertyType = 'house' | 'apartment' | 'duplex' | 'penthouse' | 'office' | 'retail' | 'industrial' | 'industrial_unit' | 'retail_unit' | 'investment' | 'development' | 'other';
 export type PropertyStatus = 'draft' | 'available' | 'under_offer' | 'sale_agreed' | 'let' | 'sold' | 'off_market';
 
-export interface PropertyImage { id: string; storage_path: string; image_url: string; large_url?: string; alt: string | null; sort_order: number; is_cover: boolean }
+export interface PropertyImage { id: string; storage_path: string; image_url: string; large_url?: string; alt: string | null; sort_order: number; is_cover: boolean; width?: number; height?: number; blurDataURL?: string; communal?: boolean }
 export interface Property {
   id: string; slug: string; title: string; short_description: string | null; description: string | null;
   property_type: PropertyType; listing_type: ListingType; status: PropertyStatus; price: number | null; price_label: string | null;

@@ -124,6 +124,8 @@
 .gallery-mobile{display:none;}
 .gallery-lightbox{padding:7vh 4vw 4vh;}
 .lightbox-content{width:min(92vw,1440px);}
+.lightbox-exit{position:absolute;top:24px;left:28px;z-index:1;display:flex;align-items:center;gap:10px;min-height:46px;padding:0 15px;border:1px solid rgba(255,255,255,.3);border-radius:24px;background:rgba(20,27,23,.64);color:#fff;font-size:12px;cursor:pointer;}
+.lightbox-exit span{font-size:18px;}
 .lightbox-photo{display:grid;place-items:center;height:min(82vh,1000px);background:transparent;}
 .lightbox-photo>img{position:static!important;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;}
 .lightbox-photo>button{width:48px;height:48px;font-size:25px;}
@@ -139,6 +141,7 @@
   .gallery-mobile-image img{display:block;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;}
   .gallery-count{position:absolute;left:12px;bottom:12px;padding:7px 10px;border-radius:20px;background:rgba(31,58,46,.9);color:#fff;font-size:11px;font-variant-numeric:tabular-nums;}
   .lightbox-content{width:100%;}
+  .lightbox-exit{top:10px;left:12px;min-height:40px;padding-inline:12px;font-size:11px;}
   .lightbox-photo{height:min(72vh,760px);}
   .lightbox-photo .lightbox-prev{left:8px}.lightbox-photo .lightbox-next{right:8px}
 }
