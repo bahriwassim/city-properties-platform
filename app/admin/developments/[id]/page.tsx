@@ -1,0 +1,5 @@
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { requireAdmin } from '@/lib/supabase/admin';
+import { DevelopmentEditor } from '@/components/admin/development-editor';
+export default async function EditDevelopmentPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{error?:string;success?:string}>}){const {id}=await params;const [{supabase},qs]=await Promise.all([requireAdmin(),searchParams]);const {data,error}=await supabase.from('developments').select('*').eq('id',id).single();if(error||!data)notFound();return <><div className="admin-page-head"><div><span className="eyebrow">New homes management</span><h1>Edit development</h1><p>{data.name}</p></div><div className="admin-head-actions"><Link className="admin-back" href="/admin/developments">← All developments</Link>{data.published&&<Link className="button button-small" href={'/new-homes/'+data.slug} target="_blank">Preview →</Link>}</div></div>{qs.error&&<div className="admin-alert">Could not save the development.</div>}{qs.success&&<div className="admin-success">Development saved successfully.</div>}<DevelopmentEditor development={data}/></>}

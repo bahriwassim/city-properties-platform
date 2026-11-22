@@ -1,0 +1,6 @@
+project_id = "city-properties"
+
+[auth]
+enable_signup = false
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/auth/confirm", "https://cityproperties.ie/auth/confirm"]

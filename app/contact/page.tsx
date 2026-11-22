@@ -1,0 +1,6 @@
+﻿import type { Metadata } from 'next';
+import { ContactForm } from '@/components/site/contact-form';
+import { getSiteSettings } from '@/lib/data';
+export const metadata:Metadata={title:'Contact City Properties Dublin',description:'Contact City Properties in Dublin. Call 01 459 5941 or email info@cityproperties.ie. PSRA Licence No: 001363.'};
+export default async function ContactPage(){const settings=await getSiteSettings();return <section className="contact-page wrap"><div className="contact-intro"><span className="eyebrow">City Properties · Dublin</span><h1>Let’s talk<br/><em>property.</em></h1><p>Buying, renting, selling, letting or looking for commercial property? Send us a message.</p><div className="contact-quick"><a href="tel:+35314595941"><small>Telephone</small>{settings.telephone}</a><a href={'mailto:'+settings.email}><small>Email</small>{settings.email}</a><p><small>PSRA Licence No.</small>001363</p></div></div><div className="contact-panel"><span className="eyebrow">Send an enquiry</span><ContactForm/></div><div className="contact-offices"><h2>Visit City Properties</h2><div>{settings.offices.map((office,index)=><p key={index}><b>{String(index+1).padStart(2,'0')}</b><br/>{office.address}</p>)}</div></div></section>}
+

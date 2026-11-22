@@ -1,0 +1,8 @@
+{
+  "name": "city-properties-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {"dev":"next dev","build":"next build","start":"next start","lint":"next lint"},
+  "dependencies": {"@supabase/ssr":"^0.8.0","@supabase/supabase-js":"^2.112.4","next":"15.5.23","react":"19.2.8","react-dom":"19.2.8"},
+  "devDependencies": {"@types/node":"^22.20.0","@types/react":"^19.2.18","typescript":"^5.9.3"}
+}
