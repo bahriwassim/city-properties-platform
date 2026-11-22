@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { HeroSearch } from '@/components/site/hero-search';
 import { ArrowIcon } from '@/components/site/arrow-icon';
+import { ValuationCTA } from '@/components/site/valuation-cta';
 
 const heroImages = [
   { src: '/images/dublin-georgian.webp', alt: 'Red brick Georgian townhouse on a leafy Dublin street' },
@@ -25,12 +26,13 @@ export function Hero() {
     <div className="hero-visual" aria-label="City Properties Dublin homes">
       {heroImages.map((image, index) => <Image key={image.src} src={image.src} alt={image.alt} fill priority={index === 0} sizes="100vw" className={`hero-image ${activeImage === index ? 'is-active' : ''}`} />)}
     </div>
+    <div className="hero-tint" />
     <div className="hero-shade" />
     <div className="hero-copy wrap">
       <span className="eyebrow">City Properties · Dublin</span>
       <h1><span>Your property.</span><br /><em>Our perspective.</em></h1>
       <p>Residential, commercial and lettings property, guided by local knowledge.</p>
-      <div className="hero-actions"><Link className="button button-light" href="/residential">Explore properties <ArrowIcon /></Link><Link className="button button-quiet" href="/contact">Request a valuation <ArrowIcon /></Link></div>
+      <div className="hero-actions"><Link className="button button-light" href="/residential">Explore properties <ArrowIcon /></Link><ValuationCTA variant="secondary" location="homepage-hero">Request a valuation</ValuationCTA></div>
     </div>
     <HeroSearch />
   </section>;

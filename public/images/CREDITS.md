@@ -13,3 +13,13 @@ AI images are architectural mood imagery only. They are not presented as actual 
 
 The hero WebP is 2000 × 1126 and 297,878 bytes. It is resized from the generated source to meet the requested dimensions and transfer budget.
 
+
+## Valuation mood images
+
+| Filename | Slot | Source / author | Licence / notes | Source |
+|---|---|---|---|---|
+| `page-headers/valuation-handshake.webp` | Valuation page header; reusable inner-page header mood image | Alena Darmel, Pexels photo 7642001 | Pexels free licence, including commercial use. Pexels uploader terms require the uploader to hold the necessary rights/permissions. No per-image model-release note was surfaced; use only as generic mood imagery and do not imply endorsement, client or staff status. | https://www.pexels.com/photo/a-real-estate-agent-and-a-client-shaking-hands-7642001/ |
+| `page-headers/valuation-key-handover.webp` | Valuation form side image; New Homes header mood image | RDNE Stock project, Pexels photo 8293745 | Pexels free licence, including commercial use. Pexels uploader terms require the uploader to hold the necessary rights/permissions. No per-image model-release note was surfaced; use only as generic mood imagery and do not imply endorsement, client or staff status. | https://www.pexels.com/photo/a-man-handing-the-key-to-the-woman-while-shaking-their-hands-8293745/ |
+
+The two photographs are locally hosted editorial mood imagery. People shown are not represented as City Properties staff, clients or endorsers. The existing header-logo file and its display remain unchanged.
+

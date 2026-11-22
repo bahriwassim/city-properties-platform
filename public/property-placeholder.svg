@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="City Properties property photography placeholder">
-  <rect width="1200" height="900" fill="#e8e7e0"/>
-  <path d="M110 704H1090M178 704V285H1022V704M178 355H1022M394 285V704M806 285V704M178 510H1022" fill="none" stroke="#b8beb6" stroke-width="2"/>
-  <path d="M445 704V520H755V704M480 557H580V644H480ZM620 557H720V644H620Z" fill="none" stroke="#8b978c" stroke-width="2"/>
-  <path d="M520 285V200H680V285" fill="none" stroke="#b8beb6" stroke-width="2"/>
-  <text x="600" y="790" text-anchor="middle" fill="#315246" font-family="Arial,sans-serif" font-size="22" letter-spacing="6">CITY PROPERTIES</text>
+  <rect width="1200" height="900" fill="#E9EBEE"/>
+  <path d="M110 704H1090M178 704V285H1022V704M178 355H1022M394 285V704M806 285V704M178 510H1022" fill="none" stroke="#9AA1AB" stroke-width="2"/>
+  <path d="M445 704V520H755V704M480 557H580V644H480ZM620 557H720V644H620Z" fill="none" stroke="#5B6470" stroke-width="2"/>
+  <path d="M520 285V200H680V285" fill="none" stroke="#9AA1AB" stroke-width="2"/>
+  <text x="600" y="790" text-anchor="middle" fill="#12263F" font-family="Arial,sans-serif" font-size="22" letter-spacing="6">CITY PROPERTIES</text>
 </svg>
