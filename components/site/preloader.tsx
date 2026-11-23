@@ -1,6 +1,5 @@
 ﻿'use client';
 
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
@@ -31,8 +30,8 @@ export function Preloader() {
   if (!visible) return null;
   return <div className={`preloader ${leaving ? 'is-leaving' : ''}`} role="status" aria-label="Loading City Properties">
     <div className="preloader-content">
-      <Image className="preloader-logo" src="/city-properties-logo.png" alt="City Properties" width={200} height={276} priority />
-      <span className="preloader-caption">A considered perspective on property</span>
+      <span className="preloader-wordmark">City Properties</span>
+      <span className="preloader-caption">Dublin property</span>
       <div className="preloader-track" aria-hidden="true"><i /></div>
     </div>
   </div>;

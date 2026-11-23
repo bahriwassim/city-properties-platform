@@ -11,6 +11,6 @@ export const viewport:Viewport={themeColor:'#12263F'};
 
 export async function generateMetadata():Promise<Metadata>{const settings=await getSiteSettings();return {metadataBase:new URL('https://cityproperties.ie'),title:{default:settings.default_seo_title,template:'%s | City Properties'},description:settings.default_seo_description,icons:{icon:'/icon.svg'},manifest:'/manifest.webmanifest',openGraph:{type:'website',siteName:'City Properties',locale:'en_IE',images:['/images/dublin-georgian.webp']},twitter:{card:'summary_large_image',images:['/images/dublin-georgian.webp']}}}
 
-export default async function RootLayout({children}:{children:React.ReactNode}){const settings=await getSiteSettings();return <html lang="en-IE"><body><SiteChrome header={<><Preloader/><Header telephone={settings.telephone}/></>} footer={<Footer settings={settings}/>}>{children}</SiteChrome></body></html>}
+export default async function RootLayout({children}:{children:React.ReactNode}){const settings=await getSiteSettings();return <html lang="en-IE"><body><SiteChrome header={<><Preloader/><Header/></>} footer={<Footer settings={settings}/>}>{children}</SiteChrome></body></html>}
 
 

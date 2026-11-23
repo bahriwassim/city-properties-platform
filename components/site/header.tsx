@@ -1,24 +1,58 @@
-﻿'use client';
+'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import { ArrowIcon } from '@/components/site/arrow-icon';
 import { ValuationCTA } from '@/components/site/valuation-cta';
+import { copy } from '@/data/copy';
 
-const links = [['Home','/'],['Residential','/residential'],['Commercial','/commercial'],['Lettings','/lettings'],['New homes','/new-homes'],['Valuation','/valuation'],['Contact us','/contact']];
+const links = copy.navigation.links;
 
-export function Header({telephone='01 459 5941'}:{telephone?:string}) {
-  const [scrolled,setScrolled]=useState(false); const [hidden,setHidden]=useState(false); const [open,setOpen]=useState(false); const pathname=usePathname();
+export function Header() {
+  const [scrolled,setScrolled]=useState(false);
+  const [hidden,setHidden]=useState(false);
+  const [open,setOpen]=useState(false);
+  const pathname=usePathname();
   const previousY=useRef(0);
-  useEffect(()=>{const fn=()=>{const y=window.scrollY;setScrolled(y>80);if(y<80||open)setHidden(false);else if(y>previousY.current+4)setHidden(true);else if(y<previousY.current-4)setHidden(false);previousY.current=y};fn();window.addEventListener('scroll',fn,{passive:true});return()=>window.removeEventListener('scroll',fn)},[open]);
+
+  useEffect(()=>{
+    const onScroll=()=>{
+      const y=window.scrollY;
+      setScrolled(y>80);
+      if(y<80||open)setHidden(false);
+      else if(y>previousY.current+4)setHidden(true);
+      else if(y<previousY.current-4)setHidden(false);
+      previousY.current=y;
+    };
+    onScroll();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    return()=>window.removeEventListener('scroll',onScroll);
+  },[open]);
   useEffect(()=>setOpen(false),[pathname]);
-  useEffect(()=>{document.body.classList.toggle('menu-is-open',open);return()=>document.body.classList.remove('menu-is-open')},[open]);
-  const phoneHref='tel:'+telephone.replace(/[^+0-9]/g,'');
-  const pageHeaderActive=['/','/residential','/commercial','/lettings','/new-homes','/contact','/valuation','/privacy-policy','/cookie-policy','/terms'].includes(pathname);
-  return <header className={`site-header ${pageHeaderActive?'page-header-active':''} ${scrolled?'is-scrolled':''} ${hidden?'is-hidden':''} ${open?'menu-open':''}`}><div className="header-inner wrap"><Link href="/" className="brand" aria-label="City Properties home"><Image className="brand-logo" src="/city-properties-logo.png" alt="City Properties" width={200} height={276} priority/></Link><nav className="desktop-nav" aria-label="Main navigation">{links.map(([label,href])=><Link key={href} href={href} className={pathname===href?'current':''}>{label}</Link>)}</nav><div className="header-actions"><a href={phoneHref} className="header-phone">{telephone}</a><ValuationCTA variant="primary" location="header">Request valuation</ValuationCTA><button className="menu-button" aria-expanded={open} aria-label={open?'Close menu':'Open menu'} onClick={()=>setOpen(!open)}><i/><i/></button></div></div><div className="mobile-menu" aria-hidden={!open}><nav aria-label="Mobile navigation"><ValuationCTA variant="primary" location="mobile-menu">Request valuation</ValuationCTA>{links.slice(1).filter(([,href])=>href!=='/valuation').map(([label,href],index)=><Link style={{'--i':index} as React.CSSProperties} key={href} href={href}>{label}<ArrowIcon/></Link>)}<a className="mobile-phone" href={phoneHref}>{telephone}</a></nav></div></header>;
+  useEffect(()=>{
+    document.body.classList.toggle('menu-is-open',open);
+    return()=>document.body.classList.remove('menu-is-open');
+  },[open]);
+
+  return <header className={`site-header ${scrolled?'is-scrolled':''} ${hidden?'is-hidden':''} ${open?'menu-open':''}`}>
+    <div className="header-inner wrap">
+      <Link href="/" className="brand" aria-label="City Properties home">
+        <Image className="brand-logo" src="/city-properties-logo.png" alt="City Properties" width={70} height={82} priority />
+      </Link>
+      <nav className="desktop-nav" aria-label="Main navigation">
+        {links.map(([label,href])=><Link key={href} href={href} className={pathname===href||href==='/residential'&&pathname.startsWith('/residential')?'current':''}>{label}</Link>)}
+      </nav>
+      <button className="menu-button" aria-expanded={open} aria-label={open?'Close menu':'Open menu'} onClick={()=>setOpen(!open)}><i/><i/></button>
+    </div>
+    <div className="mobile-menu" aria-hidden={!open}>
+      <nav aria-label="Mobile navigation">
+        {links.map(([label,href],index)=><Fragment key={href}>
+          <Link style={{'--i':index} as React.CSSProperties} href={href}>{label}</Link>
+          {href==='/residential'&&<Link className="mobile-sub-link" style={{'--i':index+.5} as React.CSSProperties} href="/new-homes">{copy.navigation.newHomes}</Link>}
+        </Fragment>)}
+        <ValuationCTA variant="primary" location="mobile-menu">{copy.home.valuationLink}</ValuationCTA>
+      </nav>
+    </div>
+  </header>;
 }
-
-
-

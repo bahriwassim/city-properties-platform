@@ -1,13 +1,13 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { LISTING_PHOTO_SOURCES } from '../data/listings.ts';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..','public','images','listings');
-const widths=[480,960,1600,2400];
+const responsiveWidths=[320,480,960,1600,2400];
 const entries=LISTING_PHOTO_SOURCES.flatMap(({slug,photos})=>photos.map((url,index)=>({slug,index,url})));
-const missing=[];let completed=0;
+const missing=[];const imageMetadata={};let completed=0;
 async function prepare(item){
  const dir=path.join(root,item.slug);await mkdir(dir,{recursive:true});
  const suffix=item.url.match(/_[^./]+(?=\.[^.]+$)/)?.[0]||'_l';
@@ -18,11 +18,18 @@ async function prepare(item){
  if(!bytes){missing.push({slug:item.slug,index:item.index+1,source:item.url});console.error(`MISSING ${item.slug} photo ${item.index+1}: ${item.url}`);return}
  await writeFile(`${base}_l${path.extname(new URL(selected).pathname)}`,bytes);
  const source=sharp(bytes);const meta=await source.metadata();
- await Promise.all(widths.map(async width=>{if(!meta.width)return;await source.clone().resize({width,withoutEnlargement:true}).webp({quality:80,effort:5}).toFile(`${base}-${width}.webp`)}));
- completed++;console.log(`OK ${item.slug} photo ${item.index+1}: ${selected}`);
+ if(!meta.width||!meta.height)throw new Error(`Could not read image dimensions: ${selected}`);
+ const previous=(await readdir(dir)).filter(name=>name.startsWith(path.basename(base)+'-')&&name.endsWith('.webp'));
+ await Promise.all(previous.map(name=>rm(path.join(dir,name),{force:true})));
+ const widths=[...new Set([...responsiveWidths.filter(width=>width<meta.width),meta.width])].sort((a,b)=>a-b);
+ await Promise.all(widths.map(async width=>source.clone().resize({width,withoutEnlargement:true}).webp({quality:82,effort:5}).toFile(`${base}-${width}.webp`)));
+ const blur=await source.clone().resize({width:24}).blur(1.5).webp({quality:38}).toBuffer();
+ imageMetadata[`${item.slug}/${item.index+1}`]={width:meta.width,height:meta.height,blurDataURL:`data:image/webp;base64,${blur.toString('base64')}`,sourceUrl:selected};
+ completed++;console.log(`OK ${item.slug} photo ${item.index+1}: ${meta.width}×${meta.height} from ${selected}`);
 }
 let cursor=0;
 async function worker(){while(cursor<entries.length){const item=entries[cursor++];await prepare(item)}}
 await Promise.all(Array.from({length:3},worker));
+await writeFile(path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..','data','listing-image-metadata.json'),JSON.stringify(imageMetadata,null,2));
 await writeFile(path.join(root,'DOWNLOAD_REPORT.json'),JSON.stringify({requested:entries.length,downloaded:completed,missing},null,2));
 console.log(JSON.stringify({requested:entries.length,downloaded:completed,missing},null,2));
