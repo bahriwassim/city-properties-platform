@@ -8,11 +8,11 @@ import { ValuationCTA } from '@/components/site/valuation-cta';
 import { copy } from '@/data/copy';
 
 const links = [
-  ['Sell', '/sell'],
-  ['Rent', '/let'],
+  ['Sales', '/sell'],
+  ['Lettings', '/let'],
   ['Valuations', '/valuation'],
-  ['Commercial', '/commercial'],
-  ['Contact', '/contact'],
+  ['Purchase', '/residential'],
+  ['Rent', '/let'],
 ] as const;
 
 export function Header() {
@@ -47,13 +47,13 @@ export function Header() {
         <Image className="brand-logo" src="/city-properties-logo.png" alt="City Properties" width={70} height={82} priority />
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
-        {links.map(([label,href])=><Link key={href} href={href} className={pathname===href?'current':''}>{label}</Link>)}
+        {links.map(([label,href])=><Link key={label} href={href} className={pathname===href||href==='/residential'&&pathname.startsWith('/residential')?'current':''}>{label}</Link>)}
       </nav>
       <button className="menu-button" aria-expanded={open} aria-label={open?'Close menu':'Open menu'} onClick={()=>setOpen(!open)}><i/><i/></button>
     </div>
     <div className="mobile-menu" aria-hidden={!open}>
       <nav aria-label="Mobile navigation">
-        {links.map(([label,href],index)=><Link key={href} style={{'--i':index} as React.CSSProperties} href={href}>{label}</Link>)}
+        {links.map(([label,href],index)=><Link key={label} style={{'--i':index} as React.CSSProperties} href={href}>{label}</Link>)}
         <ValuationCTA variant="primary" location="mobile-menu">{copy.home.valuationLink}</ValuationCTA>
       </nav>
     </div>
